@@ -96,6 +96,12 @@ export default function Footer() {
                   ></Image>
                 </div>
               </div>
+              <div className="flex gap-6 items-center">
+                {Icons.ic_facebook}
+                {Icons.ic_twitter}
+                {Icons.ic_ig}
+                {Icons.ic_linkedin}
+              </div>
             </Box>
           </div>
         </div>

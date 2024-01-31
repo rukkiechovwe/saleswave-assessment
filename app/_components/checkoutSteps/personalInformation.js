@@ -1,20 +1,33 @@
 "use client";
 import { Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
-import { SET_PERSONAL_INFORMATION } from "@/app/redux/reducers/checkoutSlice";
+import { useRouter } from "next/navigation";
+import { object, string, ref } from "yup";
 
+import { SET_PERSONAL_INFORMATION } from "@/app/redux/reducers/checkoutSlice";
 import Input from "../ui/input";
 import Button from "../ui/button";
-import { useRouter } from "next/navigation";
 
 export default function PersonalInformation({ nextStep }) {
   const router = useRouter();
   const dispatch = useDispatch();
 
+  const validateSchema = object().shape({
+    first_name: string().required("Please enter your First Name"),
+    last_name: string().required("Please enter your Last Name"),
+    email: string().required("Please enter your Email"),
+    phone_number: string().required("Please enter your Phone Number"),
+    password: string().required("Please enter your Password"),
+    confirm_password: string().oneOf(
+      [ref("password"), null],
+      "Passwords must match"
+    ),
+  });
+
   const submitForm = async (values) => {
-    // form validation before submission
     dispatch(SET_PERSONAL_INFORMATION(values));
   };
+
   return (
     <>
       <div className="py-4 border-b border-solid border-neutral-80">
@@ -37,6 +50,8 @@ export default function PersonalInformation({ nextStep }) {
           enableReinitialize={true}
           validateOnChange={true}
           validateOnBlur={false}
+          validationSchema={validateSchema}
+          onSubmit={(values) => submitForm(values).then((_) => nextStep())}
         >
           {(props) => {
             const {
@@ -138,11 +153,7 @@ export default function PersonalInformation({ nextStep }) {
                   <Button secondary={true} onClick={() => router.push("/")}>
                     Cancel
                   </Button>
-                  <Button
-                    type="submit"
-                    onClick={() => submitForm(values).then((_) => nextStep())}
-                    small={true}
-                  >
+                  <Button type="submit" small={true}>
                     Next
                   </Button>
                 </div>

@@ -28,6 +28,7 @@ module.exports = {
         "red-500": "#DB4444",
         "green-500": "#00FF66",
         "amber-400": "#FFAD33",
+        red: "#ff0808",
       },
       backgroundImage: {
         "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",

@@ -14,7 +14,6 @@ export default function Input({
           className={`absolute w-full h-full p-4 bg-transparent top-0 left-0 z-[99]`}
           autoComplete="off"
           autoCorrect="off"
-          autoCapitalize="off"
           spellCheck="false"
           {...rest}
         />
@@ -30,7 +29,7 @@ export default function Input({
           </p>
         )}
       </div>
-      {errors && <p className="mt-2 text-xs text-error">{errors}</p>}
+      {errors && <p className="mt-2 text-xs text-red">{errors}</p>}
     </div>
   );
 }

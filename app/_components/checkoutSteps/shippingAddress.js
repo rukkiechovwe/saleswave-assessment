@@ -1,16 +1,22 @@
 "use client";
 import { Form, Formik } from "formik";
 import { useDispatch } from "react-redux";
-import { SET_SHIPPING_ADDRESS } from "@/app/redux/reducers/checkoutSlice";
+import { object, string } from "yup";
 
+import { SET_SHIPPING_ADDRESS } from "@/app/redux/reducers/checkoutSlice";
 import Button from "../ui/button";
 import Input from "../ui/input";
 
 export default function ShippingAddress({ nextStep, prevStep }) {
   const dispatch = useDispatch();
 
+  const validateSchema = object().shape({
+    street: string().required("Please enter your Street"),
+    town: string().required("Please enter your Town/City"),
+    state: string().required("Please enter your State"),
+  });
+
   const submitForm = async (values) => {
-    // form validation before submission
     dispatch(SET_SHIPPING_ADDRESS(values));
   };
 
@@ -34,6 +40,8 @@ export default function ShippingAddress({ nextStep, prevStep }) {
           enableReinitialize={true}
           validateOnChange={true}
           validateOnBlur={false}
+          validationSchema={validateSchema}
+          onSubmit={(values) => submitForm(values).then((_) => nextStep())}
         >
           {(props) => {
             const {
@@ -82,7 +90,7 @@ export default function ShippingAddress({ nextStep, prevStep }) {
                     type="text"
                     id="town"
                     name="town"
-                    title="Town/City*"
+                    title="Town/City"
                     optional={false}
                     value={values.town}
                     onChange={handleChange}
@@ -126,11 +134,7 @@ export default function ShippingAddress({ nextStep, prevStep }) {
                   <Button secondary={true} onClick={prevStep}>
                     Previous
                   </Button>
-                  <Button
-                    type="submit"
-                    onClick={() => submitForm(values).then((_) => nextStep())}
-                    small={true}
-                  >
+                  <Button type="submit" small={true}>
                     Next
                   </Button>
                 </div>

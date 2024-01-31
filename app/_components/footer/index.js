@@ -1,9 +1,3 @@
-// import Image from "next/image";
-// import logo from "../../_assets/logo.png";
-// import { Button } from "../ui/button";
-// import Icons from "../../_assets/icons";
-// import Link from "next/link";
-
 import Icons from "@/app/_assets/icons";
 import Images from "@/app/_assets/images";
 import Image from "next/image";

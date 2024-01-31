@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Images from "@/app/_assets/images";
 import Icons from "@/app/_assets/icons";
 import products from "@/app/_utils/data/prodcucts";
 

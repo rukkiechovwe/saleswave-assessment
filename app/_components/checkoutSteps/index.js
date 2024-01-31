@@ -3,13 +3,12 @@ import Confirmation from "./confirmation";
 import Payment from "./payment";
 import PersonalInformation from "./personalInformation";
 import ShippingAddress from "./shippingAddress";
-import Button from "../ui/button";
 import Info from "../ui/info";
 import useSteps from "@/app/_utils/hooks/useSteps";
-import { useRouter } from "next/navigation";
+import ProductCard from "../products/productCard";
+import products from "@/app/_utils/data/prodcucts";
 
 export default function CheckoutSteps() {
-  const router = useRouter();
   const { steps, currentStep, nextStep, prevStep } = useSteps();
 
   return (
@@ -29,29 +28,42 @@ export default function CheckoutSteps() {
             </div>
           ))}
         </div>
-        <div className="border-b border-solid border-neutral-80 pb-[166px]">
-          {currentStep === 0 && <PersonalInformation />}
-          {currentStep === 1 && <ShippingAddress />}
-          {currentStep === 2 && <Payment />}
-          {currentStep === 3 && <Confirmation />}
+        <div
+          className={
+            currentStep === 2
+              ? "mb-[93px] pb-4"
+              : currentStep === 3
+              ? "mb-10 pb-16"
+              : ""
+          }
+        >
+          {currentStep === 0 && <PersonalInformation nextStep={nextStep} />}
+          {currentStep === 1 && (
+            <ShippingAddress nextStep={nextStep} prevStep={prevStep} />
+          )}
+          {currentStep === 2 && (
+            <Payment nextStep={nextStep} prevStep={prevStep} />
+          )}
+          {currentStep === 3 && (
+            <Confirmation nextStep={nextStep} prevStep={prevStep} />
+          )}
         </div>
-        {currentStep < steps.length - 1 && (
-          <div className="flex gap-2 justify-end pt-6 pb-4 px-[32px]">
-            <Button
-              secondary={true}
-              onClick={currentStep == 0 ? () => router.push("/") : prevStep}
-            >
-              {currentStep == 0 ? "Cancel" : "Previous"}
-            </Button>
-            <Button onClick={nextStep} small={true}>
-              {currentStep == 2 ? "Pay" : "Next"}
-            </Button>
-          </div>
-        )}
       </div>
       {currentStep < 2 && (
         <div className="container pt-[37px] pb-[34px]">
           <Info />
+        </div>
+      )}
+      {currentStep == 3 && (
+        <div className="container">
+          <h3 className="pb-[32px] font-medium text-[21px]">We think you might like there</h3>
+          <div className="grid grid-cols-4 gap-[30px] pb-[30px]">
+            {[products[4], products[5], products[6], products[7]].map(
+              (product) => (
+                <ProductCard key={product.product_id} product={product} />
+              )
+            )}
+          </div>
         </div>
       )}
     </>

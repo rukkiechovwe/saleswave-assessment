@@ -1,6 +1,7 @@
 import products from "@/app/_utils/data/prodcucts";
 import SectionHeader from "../ui/sectionHeader";
 import ProductCard from "./productCard";
+import Button from "../ui/button";
 
 export default function Products() {
   return (
@@ -14,6 +15,9 @@ export default function Products() {
           {products.map((product) => (
             <ProductCard key={product.product_id} product={product} />
           ))}
+        </div>
+        <div className="flex justify-center">
+          <Button loading={true}>Load more Products</Button>
         </div>
       </div>
     </section>

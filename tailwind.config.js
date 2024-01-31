@@ -11,10 +11,13 @@ module.exports = {
         white: "#FFFFFF",
         black: "#000000",
         "black-30": "rgba(0, 0, 0, 0.3)",
+        "black-100": "rgba(47, 46, 48, 0.3)",
         "black-300": "#0000004D",
+        "black-900": "#0D111B",
 
         "neutral-50": "#FAFAFA",
         "neutral-60": "#FCFCFC",
+        "neutral-70": "#FAFCFE",
         "neutral-80": "#F0F0F0",
         "neutral-100": "#F5F5F5",
         "slate-200": "#E4EAF1",

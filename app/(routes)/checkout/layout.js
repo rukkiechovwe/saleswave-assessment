@@ -3,6 +3,7 @@ import "@/app/globals.css";
 import Header from "@/app/_components/checkoutHeader";
 import store from "@/app/redux/store";
 import { Providers } from "@/app/redux/provider";
+import Footer from "@/app/_components/checkoutFooter";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
@@ -27,7 +28,8 @@ export default function RootLayout({ children }) {
         <Header />
 
         <Providers store={store}>{children}</Providers>
-        {/* footer */}
+
+        <Footer />
       </body>
     </html>
   );

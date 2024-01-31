@@ -1,5 +1,4 @@
 import Icons from "@/app/_assets/icons";
-import React from "react";
 
 export default function SectionHeader({ title, description }) {
   return (

@@ -2,6 +2,8 @@ import { Inter, Poppins } from "next/font/google";
 import "../../globals.css";
 import Header from "../../_components/header";
 
+// Inter font not working
+
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter" });
 
 const poppins = Poppins({
@@ -20,7 +22,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={`${inter.className} ${poppins.className} font-poppins`}>
-        <Header/>
+        <Header />
         {children}
       </body>
     </html>
